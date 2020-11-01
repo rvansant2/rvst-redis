@@ -1,17 +1,28 @@
 version: '3.7'
 services:
 
-  api:
-    build:
-      context: ./
-      dockerfile: Dockerfile.dev
+  redis:
+    image: redis:6.0.9-alpine
     restart: always
-    volumes:
-      - ./src:/rvst-docker/src:delegated
-      - ./Cargo.toml:/rvst-docker/Cargo.toml:delegated
     ports:
-      - 8000:8000
+      - 6379:6379
     logging:
       options:
         max-size: 10m
+
+  # api:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile.dev
+  #   restart: always
+  #   volumes:
+  #     - ./src:/rvst-docker/src:delegated
+  #     - ./Cargo.toml:/rvst-docker/Cargo.toml:delegated
+  #   ports:
+  #     - 8000:8000
+  #   logging:
+  #     options:
+  #       max-size: 10m
+
+
     
