@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "67fb729c-6f94-4999-85aa-acd908e12c00",
+		"name": "Rust-Redis",
+		"description": "Rust-Redis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Key/Value Redis",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"key\": \"cool place\",\n    \"value\": \"walleroolabs\",\n    \"ttl_seconds\": 60\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rust-redis-api}}/redis",
+					"host": [
+						"{{rust-redis-api}}"
+					],
+					"path": [
+						"redis"
+					]
+				},
+				"description": "Post Redis"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Key/Value Redis",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"key\": \"dave2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{rust-redis-api}}/redis",
+					"host": [
+						"{{rust-redis-api}}"
+					],
+					"path": [
+						"redis"
+					]
+				},
+				"description": "Post Redis"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Key/Value Redis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Get Redis"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,11 +1,12 @@
 FROM rust:1.47 as compiled
 
-RUN USER=root cargo new --bin rvst-docker
-WORKDIR /rvst-docker
+RUN USER=root cargo new --bin rvst-redis
+WORKDIR /rvst-redis
 COPY ./Cargo.toml .
 COPY ./src ./src
 RUN cargo build --release
 RUN rm -rf ./src
+RUN ls -al target/release
 
 FROM debian:buster-slim
 ARG APP=/usr/src/rvst-app
@@ -21,7 +22,7 @@ RUN groupadd $APP_USER \
     && useradd -g $APP_USER $APP_USER \
     && mkdir -p ${APP}
 
-COPY --from=compiled /rust-docker/target/release/rvst-docker ${APP}/rvst-docker
+COPY --from=compiled /rvst-redis/target/release/rvst-redis ${APP}/rvst-redis
 
 RUN chown -R $APP_USER:$APP_USER ${APP}
 
@@ -29,4 +30,4 @@ USER $APP_USER
 WORKDIR ${APP}
 
 EXPOSE 8000
-CMD ./rvst-docker
+CMD ./rvst-redis

@@ -6,23 +6,33 @@ services:
     restart: always
     ports:
       - 6379:6379
+    networks:
+      - public
     logging:
       options:
         max-size: 10m
 
-  # api:
-  #   build:
-  #     context: ./
-  #     dockerfile: Dockerfile.dev
-  #   restart: always
-  #   volumes:
-  #     - ./src:/rvst-docker/src:delegated
-  #     - ./Cargo.toml:/rvst-docker/Cargo.toml:delegated
-  #   ports:
-  #     - 8000:8000
-  #   logging:
-  #     options:
-  #       max-size: 10m
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile.production
+    restart: always
+    depends_on:
+      - redis
+    networks:
+      - public
+    volumes:
+      - ./src:/rvst-docker/src:delegated
+      - ./Cargo.toml:/rvst-docker/Cargo.toml:delegated
+    ports:
+      - 8000:8000
+    logging:
+      options:
+        max-size: 10m
 
-
+networks:
+  public:
+  private:
+    driver: bridge
+    internal: true
     

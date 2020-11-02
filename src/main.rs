@@ -31,7 +31,7 @@ pub struct RedisQuery {
 type WebResult<T> = std::result::Result<T, Rejection>;
 type Result<T> = std::result::Result<T, Error>;
 
-const REDIS_CONNECTION_STRING: &str = "redis://127.0.0.1:6379/";
+const REDIS_CONNECTION_STRING: &str = "redis://redis:6379/";
 
 #[tokio::main]
 async fn main() {
